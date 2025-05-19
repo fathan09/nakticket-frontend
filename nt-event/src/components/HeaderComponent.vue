@@ -40,7 +40,9 @@ export default {
 }
 
 .logo {
-  height: 40px;
+  height: 90px;
+  width: 180px;
+  object-fit: contain;
 }
 
 .search-bar {
