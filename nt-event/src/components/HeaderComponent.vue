@@ -37,20 +37,22 @@ export default {
   gap: 1rem;
   flex: 1;
   min-width: 300px;
+  max-width: 60%;
 }
 
 .logo {
-  height: 90px;
+  height: 75px;
   width: 180px;
   object-fit: contain;
 }
 
 .search-bar {
+  flex: 1;
   padding: 0.6rem 1rem;
   border-radius: 20px;
   border: none;
-  width: 100%;
-  max-width: 400px;
+  min-width: 200px;
+  max-width: 100%;
   font-size: 1rem;
   background-color: white;
   color: #333;
@@ -64,9 +66,10 @@ export default {
 .nav-links {
   display: flex;
   justify-content: flex-end;
-  gap: 1.5rem;
+  gap: 2rem;
   margin-top: 1rem;
   align-items: center;
+  flex-wrap: wrap;
 }
 
 .nav-links a{
@@ -76,8 +79,8 @@ export default {
 }
 
 .profile-icon {
-  width: 24px;
-  height: 24px;
+  width: 28px;
+  height: 28px;
   background-color: white;
   border-radius: 50%;
 }
