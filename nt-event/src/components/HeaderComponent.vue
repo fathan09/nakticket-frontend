@@ -1,7 +1,7 @@
 <template>
   <header class="site-header">
     <div class="left-group">
-      <img src="@/assets/logo.png" alt="NakTicket Logo" class="logo" />
+      <img src="@/assets/NakTicket2.png" alt="NakTicket Logo" class="logo" />
       <input type="text" placeholder="Search your event!" class="search-bar" />
     </div>
     <nav class="nav-links">
