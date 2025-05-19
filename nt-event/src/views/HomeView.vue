@@ -1,44 +1,49 @@
 <template>
   <div class="home-page">
     <HeaderComponent />
+    <main class="main-content">
+      <section class="hero">
+        <h2>Discover The Upcoming Event!</h2>
+        <EventCarousel />
+      </section>
 
-    <!-- Hero Section -->
-    <section class="hero">
-      <h2>Discover The Upcoming Event!</h2>
-      <div class="carousel-placeholder"></div>
-    </section>
+      <!-- Categories -->
+      <section class="categories">
+        <h3>Categories</h3>
+        <div class="category-tabs">
+          <button>Entertainment & Performances</button>
+          <button>Exhibitions</button>
+          <button>Sports</button>
+          <button>Attractions</button>
+          <button>Others</button>
+        </div>
+      </section>
 
-    <!-- Categories -->
-    <section class="categories">
-      <h3>Categories</h3>
-      <div class="category-tabs">
-        <button>Entertainment & Performances</button>
-        <button>Exhibitions</button>
-        <button>Sports</button>
-        <button>Attractions</button>
-        <button>Others</button>
-      </div>
-    </section>
-
-    <!-- Events Grid Placeholder -->
-    <section class="event-grid">
-      <div class="event-card" v-for="n in 4" :key="n"></div>
-    </section>
+      <!-- Events Grid Placeholder -->
+      <section class="event-grid">
+        <EventCard v-for="n in 4" :key="n" />
+      </section>
+    </main>
   </div>
 </template>
 
 <script>
 import HeaderComponent from "@/components/HeaderComponent.vue";
+import EventCard from "@/components/EventCard.vue";
+import EventCarousel from "@/components/EventCarousel.vue"
 
 export default {
   name: "HomePage",
   components: {
     HeaderComponent,
+    EventCard,
+    EventCarousel,
   },
 };
 </script>
 
 <style scoped>
+
 .home-page {
   font-family: Arial, sans-serif;
 }
@@ -101,14 +106,6 @@ export default {
   background-color: #88a391;
   color: white;
   padding: 2rem 1rem;
-}
-
-.carousel-placeholder {
-  background-color: #d3d3d3;
-  height: 200px;
-  border-radius: 15px;
-  margin: 1rem auto;
-  width: 80%;
 }
 
 .categories {
