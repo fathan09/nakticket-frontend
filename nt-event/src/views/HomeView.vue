@@ -10,12 +10,14 @@
       <!-- Categories -->
       <section class="categories">
         <h3>Categories</h3>
-        <div class="category-tabs">
-          <button>Entertainment & Performances</button>
-          <button>Exhibitions</button>
-          <button>Sports</button>
-          <button>Attractions</button>
-          <button>Others</button>
+        <div class="category-box">
+          <div class="category-tabs">
+            <button>Entertainment & Performances</button>
+            <button>Exhibitions</button>
+            <button>Sports</button>
+            <button>Attractions</button>
+            <button>Others</button>
+          </div>
         </div>
       </section>
 
@@ -30,7 +32,7 @@
 <script>
 import HeaderComponent from "@/components/HeaderComponent.vue";
 import EventCard from "@/components/EventCard.vue";
-import EventCarousel from "@/components/EventCarousel.vue"
+import EventCarousel from "@/components/EventCarousel.vue";
 
 export default {
   name: "HomePage",
@@ -43,7 +45,6 @@ export default {
 </script>
 
 <style scoped>
-
 .home-page {
   font-family: Arial, sans-serif;
 }
@@ -111,6 +112,16 @@ export default {
 .categories {
   padding: 2rem 1rem;
   background-color: #fff;
+  text-align: center;
+}
+
+.category-box{
+  background-color: #f4f4f4;
+  padding: 1rem;
+  border-radius: 12px;
+  border: 1px solid #ddd;
+  max-width: 800px;
+  margin: 0 auto;
 }
 
 .category-tabs {
@@ -118,7 +129,7 @@ export default {
   gap: 1rem;
   flex-wrap: wrap;
   justify-content: center;
-  margin-top: 1rem;
+  margin-top: 0.5rem;
 }
 
 .category-tabs button {
@@ -127,6 +138,11 @@ export default {
   border-radius: 10px;
   background: white;
   cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.category-tabs button:hover {
+  background-color: #e0e0e0;
 }
 
 .event-grid {
