@@ -1,23 +1,6 @@
 <template>
   <div class="home-page">
-    <!-- Header -->
-    <header class="header">
-      <div class="logo-search">
-        <img src="/assets/logo.png" alt="NakTicket Logo" class="logo" />
-        <input type="text" placeholder="Search your event!" class="search-bar" />
-        <button class="search-btn">
-          <i class="fas fa-search"></i>
-        </button>
-      </div>
-      <nav class="nav-links">
-        <router-link to="/events">Event</router-link>
-        <router-link to="/ticketing">Ticketing</router-link>
-        <router-link to="/forum">Forum</router-link>
-        <router-link to="/merchandise">Merchandise</router-link>
-        <router-link to="/about">About Us</router-link>
-        <div class="profile-circle"></div>
-      </nav>
-    </header>
+    <HeaderComponent />
 
     <!-- Hero Section -->
     <section class="hero">
@@ -45,8 +28,13 @@
 </template>
 
 <script>
+import HeaderComponent from "@/components/HeaderComponent.vue";
+
 export default {
   name: "HomePage",
+  components: {
+    HeaderComponent,
+  },
 };
 </script>
 
