@@ -1,6 +1,5 @@
 <template>
   <div class="forum-view">
-    <HeaderComponent />
     
     <main class="forum-content">
       <div class="container">
@@ -35,7 +34,6 @@
 </template>
 
 <script>
-import HeaderComponent from "@/components/HeaderComponent.vue";
 import ForumList from "@/components/ForumList.vue";
 import ForumThread from "@/components/ForumThread.vue";
 import NewThreadForm from "@/components/NewThreadForm.vue";
@@ -46,7 +44,6 @@ import { storeToRefs } from "pinia";
 export default {
   name: "ForumView",
   components: {
-    HeaderComponent,
     ForumList,
     ForumThread,
     NewThreadForm
