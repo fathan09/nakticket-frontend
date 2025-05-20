@@ -7,9 +7,9 @@
         "price": 100,
         "organizer": "John Doe",
         "description": "This is an event",
-        "thumbnail": "/assets/logo.png",
+        "thumbnail": "NakTicket 1.png",
         "image": [
-            "/assets/NakTicket 1.png",
+            "src/assets/NakTicket 1.png",
             "-.jpg",
             "-.jpg"
         ]
@@ -17,15 +17,15 @@
 
     {
         "id": 2,
-        "name": "Event 1",
+        "name": "Event 2",
         "date": "2022-01-01",
         "time": "10:00 - 18:00",
         "price": 100,
         "organizer": "John Doe",
         "description": "This is an event",
-        "thumbnail": "/assets/logo.png",
+        "thumbnail": "NakTicket 1.png",
         "image": [
-            "/assets/NakTicket 1.png",
+            "src/assets/NakTicket 1.png",
             "-.jpg",
             "-.jpg"
         ]
