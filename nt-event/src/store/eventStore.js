@@ -1,10 +1,9 @@
 import { defineStore } from 'pinia';
-import eventData from '@/assets/data/dummyEvent.json';
+
 
 export const useEventStore = defineStore('eventStore', {
     state: () => ({
-        events: [eventData],
-        selectedEvent: null,
+        events: [],
     }),
     getters:{
         getAllEvents: (state) => state.events,
@@ -12,6 +11,17 @@ export const useEventStore = defineStore('eventStore', {
     actions: {
         getEventById(id){
             this.selectedEvent = this.events.find(e => e.id === parseInt(id));
+        },
+
+        updateEventDescription(eventId, desc){
+            const eventDesc = this.events.find(i => i.id === eventId)
+            if (eventDesc) {
+                eventDesc.description = desc
+            }
+        },
+
+        removeEventListener(eventId){
+            this.events = this.events.filter(event => event.id !== eventId)
         }
     }
 });

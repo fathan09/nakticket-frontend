@@ -1,26 +1,20 @@
 <template>
   <div class="event-card" @click="goToDetail">
-    <img :src="event.thumbnail" alt="Event Thumbnail" />
+    <router-link :to="`/event/${event.id}`">
+      <img :src="event.thumbnail" :alt="event.name + 'thumbnail'" />
+    </router-link>
   </div>
 </template>
 
 <script>
-import { useRouter } from "vue-router";
-
-
 export default {
   name: "EventCard",
   props: {
-    event: Object
+    event: {
+      type: Object,
+      required: true,
+    },
   },
-
-  setup(props){
-    const router = useRouter();
-    const goToDetail = () =>{
-      router.push({name: 'eventDetail', params: {id: props.event.id}});
-    };
-    return {goToDetail};
-  }
 };
 </script>
 

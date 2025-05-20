@@ -1,6 +1,6 @@
 <template>
   <div class="home-page">
-    <HeaderComponent />
+    
     <main class="main-content">
       <section class="hero">
         <h2>Discover The Upcoming Event!</h2>
@@ -30,26 +30,28 @@
 </template>
 
 <script>
-import HeaderComponent from "@/components/HeaderComponent.vue";
 import EventCard from "@/components/EventCard.vue";
 import EventCarousel from "@/components/EventCarousel.vue";
-import { useEventStore } from "@/store/eventStore";
-import { computed } from "vue";
 
 export default {
   name: "HomePage",
   components: {
-    HeaderComponent,
     EventCard,
     EventCarousel,
   },
-
-  setup() {
-    const eventStore = useEventStore();
-    const events = computed(() => eventStore.getAllEvents);
-
-    return { events };
-  }
+  data() {
+    return {
+      events: [],
+    };
+  },
+  mounted() {
+    fetch("/dummyEvent.json")
+      .then((res) => res.json())
+      .then((data) => {
+        this.events = data;
+      })
+      .catch((err) => console.error("Error loading events:", err));
+  },
 };
 </script>
 
@@ -124,7 +126,7 @@ export default {
   text-align: center;
 }
 
-.category-box{
+.category-box {
   background-color: #f4f4f4;
   padding: 1rem;
   border-radius: 12px;
