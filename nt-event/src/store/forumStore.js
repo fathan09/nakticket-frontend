@@ -1,9 +1,8 @@
 import { defineStore } from 'pinia';
-import forumData from '@/assets/data/dummyForum.json';
 
 export const useForumStore = defineStore('forumStore', {
   state: () => ({
-    threads: forumData,
+    threads: [],
     selectedThread: null,
     loading: false,
     submitting: false
@@ -28,8 +27,25 @@ export const useForumStore = defineStore('forumStore', {
   },
   
   actions: {
+    async fetchForumData() {
+      this.loading = true;
+      try {
+        const response = await fetch('/dummyForum.json');
+        if (!response.ok) {
+          throw new Error('Failed to fetch forum data');
+        }
+        this.threads = await response.json();
+      } catch (error) {
+        console.error('Error loading forum data:', error);
+      } finally {
+        this.loading = false;
+      }
+    },
+    
     selectThread(id) {
       this.selectedThread = this.getThreadById(id);
     },
+
+    // Add more functions here
   }
 }); 

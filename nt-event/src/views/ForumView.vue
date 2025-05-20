@@ -39,7 +39,7 @@ import HeaderComponent from "@/components/HeaderComponent.vue";
 import ForumList from "@/components/ForumList.vue";
 import ForumThread from "@/components/ForumThread.vue";
 import NewThreadForm from "@/components/NewThreadForm.vue";
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
 import { useForumStore } from "@/store/forumStore";
 import { storeToRefs } from "pinia";
 
@@ -58,6 +58,11 @@ export default {
     
     // Get reactive state from the store
     const { threads, loading, submitting, selectedThread } = storeToRefs(forumStore);
+    
+    // Fetch forum data when component is mounted
+    onMounted(() => {
+      forumStore.fetchForumData();
+    });
     
     // Methods
     const selectThread = (threadId) => {
