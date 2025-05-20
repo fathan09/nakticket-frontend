@@ -2,7 +2,7 @@
   <div class="event-detail" v-if="event">
     <div class="event-gallery">
       <img
-        v-for="(img, index) in event.images"
+        v-for="(img, index) in event.image"
         :key="index"
         :src="img"
         alt="Event Image"
@@ -18,7 +18,7 @@
     <div class="purchase-box">
       <p class="price">Price: starts from ${{ event.price }}</p>
       \
-      <button>Buy Ticket</button>
+      <button>Buy Ticket</button> <!--  Add a button function to buy ticket -->
     </div>
   </div>
   <div v-else>
@@ -27,23 +27,24 @@
 </template>
 
 <script>
-import { useEventStore } from "@/store/eventStore";
-import { storeToRefs } from "pinia";
+import { ref, onMounted } from "vue";
+import { useRoute } from "vue-router";
 
 export default {
   name: "EventDetail",
-  props: ["id"],
-  setup(props) {
-    const eventStore = useEventStore();
-    eventStore.getEventById(props.id);
+  setup() {
+    const route = useRoute();
+    const event = ref(null);
 
-    const { selectedEvent } = storeToRefs(eventStore);
+    onMounted(async () => {
+      const res = await fetch("/dummyEvent.json");
+      const data = await res.json();
+      event.value = data.find((e) => e.id === parseInt(route.params.id));
+    });
 
-    return {
-      event: selectedEvent,
-    };
+    return {event}
   },
-};
+}
 </script>
 
 <style scoped>

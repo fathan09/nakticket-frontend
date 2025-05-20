@@ -1,12 +1,19 @@
 <template>
   <div id="app">
-    <router-view />
+    <HeaderComponent />
+    <main>
+      <router-view />
+    </main>
   </div>
 </template>
 
 <script>
+import HeaderComponent from "./components/HeaderComponent.vue";
 export default {
   name: "App",
+  components: {
+    HeaderComponent,
+  }
 };
 </script>
 
@@ -17,12 +24,13 @@ export default {
   box-sizing: border-box;
 }
 
-html, body, #app {
+html,
+body,
+#app {
   height: 100%;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   background-color: #fff;
 }
-
 
 .container {
   max-width: 1200px;
