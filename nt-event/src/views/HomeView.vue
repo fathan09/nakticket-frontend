@@ -23,7 +23,7 @@
 
       <!-- Events Grid Placeholder -->
       <section class="event-grid">
-        <EventCard v-for="n in 4" :key="n" />
+        <EventCard v-for="event in events" :key="event.id" :event="event" />
       </section>
     </main>
   </div>
@@ -33,6 +33,8 @@
 import HeaderComponent from "@/components/HeaderComponent.vue";
 import EventCard from "@/components/EventCard.vue";
 import EventCarousel from "@/components/EventCarousel.vue";
+import { useEventStore } from "@/store/eventStore";
+import { computed } from "vue";
 
 export default {
   name: "HomePage",
@@ -41,6 +43,13 @@ export default {
     EventCard,
     EventCarousel,
   },
+
+  setup() {
+    const eventStore = useEventStore();
+    const events = computed(() => eventStore.getAllEvents);
+
+    return { events };
+  }
 };
 </script>
 

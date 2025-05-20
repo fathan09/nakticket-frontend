@@ -11,7 +11,6 @@ export default {
 </script>
 
 <style>
-/* Reset default margin and padding */
 * {
   margin: 0;
   padding: 0;
@@ -24,7 +23,7 @@ html, body, #app {
   background-color: #fff;
 }
 
-/* Utility classes */
+
 .container {
   max-width: 1200px;
   margin: 0 auto;
