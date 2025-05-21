@@ -1,6 +1,7 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import EventDetail from '@/views/EventDetail.vue'
+import ForumView from '@/views/ForumView.vue'
 
 const routes = [
   {
@@ -19,8 +20,12 @@ const routes = [
   {
     path: '/event/:id',
     name: 'EventDetail',
-    component: EventDetail, 
-    props: true
+    component: EventDetail,
+  },
+  {
+    path: '/forum',
+    name: 'forum',
+    component: ForumView
   }
 ]
 
