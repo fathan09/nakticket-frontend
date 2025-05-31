@@ -5,20 +5,15 @@
         v-for="(img, index) in event.image"
         :key="index"
         :src="img"
-        alt="`Event Image`"
+        alt="Event Image"
       />
     </div>
     <div class="event-info">
       <h1>{{ event.title }}</h1>
-      <p><strong>Date:</strong> {{ event.date }}</p>
-      <p><strong>Time:</strong>{{ event.time }}</p>
-      <p><strong>Organizers:</strong>{{ event.organizer }}</p>
+      <h2><strong>Date: </strong>{{ event.date }}</h2> <br>
+      <h2><strong>Time:</strong></h2> <h3>{{ event.time }}</h3><br>
+      <h2><strong>Organizers:</strong> {{ event.organizer }}</h2>
       <p>{{ event.description }}</p>
-    </div>
-    <div class="purchase-box">
-      <p class="price">Price: starts from {{ event.price }} RM</p>
-      \
-      <button>Buy Ticket</button> <!--  Add a button function to buy ticket -->
     </div>
   </div>
   <TicketList />
@@ -60,6 +55,7 @@ export default {
   display: flex;
   gap: 1rem;
   overflow-x: auto;
+  justify-content: center;
 }
 
 .event-gallery img {

@@ -9,8 +9,9 @@
         "description": "This is an event",
         "thumbnail": "NakTicket 1.png",
         "image": [
-            "NakTicket 1.png",
-            "NakTicket 1.png"
+            "/assets/NakTicket 1.png",
+            "/assets/NakTicket 1.png",
+            "/assets/NakTicket 1.png"
         ]
     },
 
@@ -22,10 +23,11 @@
         "price": 100,
         "organizer": "John Doe",
         "description": "This is an event",
-        "thumbnail": "NakTicket 1.png",
+        "thumbnail": "NakTicket2.png",
         "image": [
-            "NakTicket 1.png",
-            "NakTicket 1.png"
+            "/assets/NakTicket 1.png",
+            "/assets/NakTicket 1.png",
+            "/assets/NakTicket 1.png"
         ]
     }
 ]
