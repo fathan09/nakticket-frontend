@@ -1,6 +1,8 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import EventDetail from '@/views/EventDetail.vue'
+import ForumView from '@/views/ForumView.vue'
+import TicketCart from "../components/TicketCart.vue"
 
 const routes = [
   {
@@ -19,8 +21,14 @@ const routes = [
   {
     path: '/event/:id',
     name: 'EventDetail',
-    component: EventDetail
-  }
+    component: EventDetail,
+  },
+  {
+    path: '/forum',
+    name: 'forum',
+    component: ForumView
+  },
+  {path: "/ticket-cart", name: "TicketCart", component: TicketCart}
 ]
 
 const router = createRouter({
