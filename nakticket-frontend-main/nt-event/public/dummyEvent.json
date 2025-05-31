@@ -9,8 +9,9 @@
         "description": "This is an event",
         "thumbnail": "NakTicket 1.png",
         "image": [
-            "NakTicket 1.png",
-            "NakTicket 1.png"
+            "src/assets/NakTicket 1.png",
+            "-.jpg",
+            "-.jpg"
         ]
     },
 
@@ -24,8 +25,9 @@
         "description": "This is an event",
         "thumbnail": "NakTicket 1.png",
         "image": [
-            "NakTicket 1.png",
-            "NakTicket 1.png"
+            "src/assets/NakTicket 1.png",
+            "-.jpg",
+            "-.jpg"
         ]
     }
 ]

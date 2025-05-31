@@ -1,7 +1,7 @@
 <template>
   <div class="event-card" @click="goToDetail">
     <router-link :to="`/event/${event.id}`">
-      <img :src="`./assets/${event.thumbnail}`" :alt="event.name + ' thumbnail'" />
+      <img :src="`../assets/${event.thumbnail}`" :alt="event.name + ' thumbnail'" />
     </router-link>
   </div>
 </template>

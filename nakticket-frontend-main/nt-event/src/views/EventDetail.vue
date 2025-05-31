@@ -5,7 +5,7 @@
         v-for="(img, index) in event.image"
         :key="index"
         :src="img"
-        alt="`Event Image`"
+        alt="Event Image"
       />
     </div>
     <div class="event-info">
@@ -16,7 +16,7 @@
       <p>{{ event.description }}</p>
     </div>
     <div class="purchase-box">
-      <p class="price">Price: starts from {{ event.price }} RM</p>
+      <p class="price">Price: starts from ${{ event.price }}</p>
       \
       <button>Buy Ticket</button> <!--  Add a button function to buy ticket -->
     </div>
