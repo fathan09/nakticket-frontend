@@ -15,23 +15,21 @@
       <p><strong>Organizers:</strong>{{ event.organizer }}</p>
       <p>{{ event.description }}</p>
     </div>
-    <div class="purchase-box">
-      <p class="price">Price: starts from ${{ event.price }}</p>
-      \
-      <button>Buy Ticket</button> <!--  Add a button function to buy ticket -->
-    </div>
   </div>
-  <div v-else>
-    <p>Loading event...</p>
-  </div>
+  <TicketList />
+
 </template>
 
 <script>
 import { ref, onMounted } from "vue";
 import { useRoute } from "vue-router";
+import TicketList from '@/components/TicketList.vue';
 
 export default {
   name: "EventDetail",
+  components : {
+    TicketList
+  },
   setup() {
     const route = useRoute();
     const event = ref(null);
