@@ -1,4 +1,5 @@
 <template>
+  <div class="carousel-container mx-auto">
     <div id="eventCarousel" class="carousel slide" data-bs-ride="carousel">
       <div class="carousel-inner">
         <div
@@ -35,6 +36,7 @@
         <span class="visually-hidden">Next</span>
       </button>
     </div>
+  </div>
 </template>
 
 <script>
@@ -85,10 +87,12 @@ export default {
 }
 
 .carousel-img {
-  height: 400px;
+  height: 300px;
+  width: 100%;
   object-fit: cover;
-  border-radius: 8px;
+  border-radius: 12px;
 }
+
 
 .carousel-caption {
   position: absolute;
@@ -98,5 +102,10 @@ export default {
   background: rgba(0, 0, 0, 0.4);
   padding: 0.75rem 1rem;
   border-radius: 0.5rem;
+}
+
+.carousel-container{
+  max-width: 800px;
+  margin: 0 auto;
 }
 </style>
