@@ -1,12 +1,14 @@
 <template>
   <header class="site-header">
     <div class="left-group">
+      <router-link to="../">
       <img src="@/assets/NakTicket2.png" alt="NakTicket Logo" class="logo" />
+      </router-link>
       <input type="text" placeholder="Search your event!" class="search-bar" />
     </div>
     <nav class="nav-links">
       <router-link to="/events">Event</router-link>
-      <router-link to="/ticketing">Ticketing</router-link>
+      <router-link to="/create-event">Create Your Event</router-link>
       <router-link to="/forum">Forum</router-link>
       <router-link to="/merchandise">Merchandise</router-link>
       <router-link to="/about">About Us</router-link>

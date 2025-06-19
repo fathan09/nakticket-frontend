@@ -8,11 +8,13 @@
           :class="['carousel-item', { active: index === 0 }]"
           @click="goToDetail(event.id)"
         >
+         <router-link :to="`/event/${event.id}`">
           <img
             :src="`/assets/${event.thumbnail}`"
             class="d-block w-100 carousel-img"
             :alt="event.name"
           />
+          </router-link>
         </div>
       </div>
 
