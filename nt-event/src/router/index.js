@@ -4,6 +4,7 @@ import EventDetail from '@/views/EventDetail.vue'
 import ForumView from '@/views/ForumView.vue'
 import TicketCart from "../components/TicketCart.vue"
 import EventCreate from "../components/EventCreate.vue"
+import MyEvent from "../views/MyEvent.vue"
 
 const routes = [
   {
@@ -39,6 +40,11 @@ const routes = [
     path: "/create-event",
     name: "EventCreate",
     component: EventCreate
+  },
+  {
+    path: "/my-event",
+    name: "MyEvent",
+    component: MyEvent
   }
 ]
 
