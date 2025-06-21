@@ -12,7 +12,14 @@
       <router-link to="/forum">Forum</router-link>
       <router-link to="/merchandise">Merchandise</router-link>
       <router-link to="/about">About Us</router-link>
-      <div class="profile-icon"></div>
+      <div class="profile-wrapper" @click="toggleDropdown">
+        <div class="profile-icon"></div>
+        <div v-if="showDropdown" class="profile-dropdown">
+            <router-link to="/my-event"> My events</router-link>
+        </div>
+      </div>
+      
+
     </nav>
   </header>
 </template>
@@ -20,6 +27,16 @@
 <script>
 export default {
   name: "HeaderComponent",
+  data(){
+    return{
+      showDropdown:false,
+    };
+  },
+  methods: {
+    toggleDropdown(){
+      this.showDropdown = !this.showDropdown;
+    },
+  },
 };
 </script>
 
@@ -80,10 +97,42 @@ export default {
   font-weight: bold;
 }
 
+.profile-wrapper {
+  position: relative;
+  cursor: pointer;
+}
+
 .profile-icon {
   width: 28px;
   height: 28px;
   background-color: white;
   border-radius: 50%;
+}
+
+.profile-dropdown {
+  position: absolute;
+  top: 40px;
+  right: 0;
+  background-color: white;
+  color: #333;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  padding: 0.5rem 1rem;
+  z-index: 999;
+  display: flex;
+  flex-direction: column;
+  min-width: 150px;
+}
+
+.profile-dropdown a {
+  text-decoration: none;
+  color: #333;
+  padding: 0.5rem 0;
+  transition: background 0.2s;
+}
+
+.profile-dropdown a:hover {
+  background-color: #f5f5f5;
 }
 </style>
