@@ -1,7 +1,7 @@
 <template>
   <div class="my-event-page">
     <h2 class="title">My Events</h2>
-
+    <p>test</p>
     <!-- Event Card (View)-->
     <div v-if="filteredEvents.length" class="event-list">
       <div class="event-wrapper" v-for="event in filteredEvents" :key="event.id">
