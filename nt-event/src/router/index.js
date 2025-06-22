@@ -6,6 +6,10 @@ import TicketCart from "../components/TicketCart.vue"
 import EventCreate from "../components/EventCreate.vue"
 import MyEvent from "../views/MyEvent.vue"
 
+import MerchandiseList from '@/pages/MerchandiseList.vue';
+import MerchandiseDetail from '@/pages/MerchandiseDetail.vue';
+import MerchandiseCart from '@/pages/MerchandiseCart.vue';
+
 const routes = [
   {
     path: '/',
@@ -45,6 +49,22 @@ const routes = [
     path: "/my-event",
     name: "MyEvent",
     component: MyEvent
+  },
+  {
+    path: '/merchandise',
+    name: 'MerchandiseList',
+    component: MerchandiseList
+  },
+  {
+    path: '/merchandise/:id',
+    name: 'MerchandiseDetail',
+    component: MerchandiseDetail,
+    props: true
+  },
+  {
+    path: '/merchcart',
+    name: 'MerchandiseCart',
+    component: MerchandiseCart
   }
 ]
 
