@@ -47,28 +47,33 @@
         ></textarea>
       </div>
     </div>
-    <div class="form-actions">
-      <button @click="submitForm" class="submit-btn">Create Event Now</button>
-    </div>
   </div>
 </template>
 
 <script>
 export default {
   name: "EventCreate",
+  props: {
+    modelValue: {
+      type: Object,
+      required: true
+    }
+  },
   data() {
     return {
       organizer: "",
-      bannerPreview: null,
-      event: {
-        name: "",
-        category: "",
-        date: "",
-        time: "",
-        location: "",
-        description: "",
-      },
+      bannerPreview: null
     };
+  },
+  computed: {
+    event: {
+      get() {
+        return this.modelValue;
+      },
+      set(val) {
+        this.$emit('update:modelValue', val);
+      }
+    }
   },
   methods: {
     triggerImageUpload() {
@@ -78,11 +83,11 @@ export default {
       const file = e.target.files[0];
       if (file && file.size <= 2 * 1024 * 1024) {
         this.bannerPreview = URL.createObjectURL(file);
+        this.event = { ...this.event, banner: this.bannerPreview }; // optional sync
       } else {
         alert("File size should not exceed 2MB");
       }
     },
-
     submitForm() {
       const { name, category, date, time, location, description } = this.event;
 
@@ -98,20 +103,23 @@ export default {
       };
 
       console.log("Event Created:", eventData);
-      this.event = {
+
+      this.$emit("update:modelValue", {
         name: "",
         category: "",
         date: "",
         time: "",
         location: "",
-        description: "",
-      };
+        description: ""
+      });
+
       this.bannerPreview = null;
       alert("Event Created Successfully!");
-    },
-  },
+    }
+  }
 };
 </script>
+
 
 <style scoped>
 .event-create-box {
