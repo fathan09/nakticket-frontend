@@ -8,6 +8,10 @@ import MyEvent from "../views/MyEvent.vue"
 import Login from "../views/loginView.vue"
 import Register from "../views/registerView.vue"
 
+import MerchandiseList from '@/pages/MerchandiseList.vue';
+import MerchandiseDetail from '@/pages/MerchandiseDetail.vue';
+import MerchandiseCart from '@/pages/MerchandiseCart.vue';
+
 const routes = [
   {
     path: '/',
@@ -49,13 +53,29 @@ const routes = [
     component: MyEvent
   },
   {
-    path: "/loginView",
-    name: "LoginView",
+    path: '/merchandise',
+    name: 'MerchandiseList',
+    component: MerchandiseList
+  },
+  {
+    path: '/merchandise/:id',
+    name: 'MerchandiseDetail',
+    component: MerchandiseDetail,
+    props: true
+  },
+  {
+    path: '/merchcart',
+    name: 'MerchandiseCart',
+    component: MerchandiseCart
+  },
+  {
+    path: '/login',
+    name: 'Login',
     component: Login
   },
   {
-    path: "/registerView",
-    name: "RegisterView",
+    path: '/register',
+    name: 'Register',
     component: Register
   }
 ]
