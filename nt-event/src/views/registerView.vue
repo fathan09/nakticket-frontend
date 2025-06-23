@@ -5,6 +5,7 @@
             <input type="text" v-model="name" placeholder="Full Name" required>
             <input type="email" v-model="email" placeholder="Email" required>
             <input type="password" v-model="password" placeholder="Password" required>
+            <input type="confirm-pass" v-model="confirmPass" placeholder="Confirm Password" required>
 
             <div class="role-selection">
                 <label>
@@ -30,16 +31,18 @@
                 name:"",
                 email: "",
                 password: "",
+                confirmPass: "",
                 role: -""
             };
         },
         methods: {
             registerUser() {
-                if (this.name && this.email && this.password && this.role) {
+                if (this.name && this.email && this.password && this.confirmPass && this.role) {
                     const newUser = {
                         name: this.name,
                         email: this.email,
                         password: this.password,
+                        confirmPass: this.confirmPass,
                         role: this.role,
                     };
 
