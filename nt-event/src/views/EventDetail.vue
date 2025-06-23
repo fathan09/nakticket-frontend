@@ -1,19 +1,14 @@
 <template>
   <div class="event-detail" v-if="event">
-    <div class="event-gallery">
-      <img
-        v-for="(img, index) in event.image"
-        :key="index"
-        :src="img"
-        alt="Event Image"
-      />
+    <div class="event-banner">
+      <img :src="event.image" alt="Event Banner"/>
     </div>
     <div class="event-info">
-      <h1>{{ event.title }}</h1>
-      <h2><strong>Date: </strong>{{ event.date }}</h2> <br>
-      <h2><strong>Time:</strong></h2> <h3>{{ event.time }}</h3><br>
-      <h2><strong>Organizers:</strong> {{ event.organizer }}</h2>
-      <p>{{ event.description }}</p>
+      <h2>{{ event.title }}</h2>
+      <h3><strong>Date: </strong>{{ event.date }}</h3> <br>
+      <h3><strong>Time:</strong></h3> <h3>{{ event.time }}</h3><br>
+      <h3><strong>Organizers:</strong> {{ event.organizer }}</h3>
+      <p class="description">{{ event.description }}</p>
     </div>
   </div>
   <TicketList />
@@ -47,24 +42,60 @@ export default {
 
 <style scoped>
 .event-detail {
-  padding: 2rem;
   font-family: Arial, sans-serif;
+  background-color: #f9f9f9;
+  padding-bottom: 3rem;
 }
 
-.event-gallery {
+.event-banner {
+  width: 100%;
+  max-height: 360px;
+  overflow: hidden;
   display: flex;
-  gap: 1rem;
-  overflow-x: auto;
   justify-content: center;
+  align-items: center;
+  background: #eaeaea;
 }
 
-.event-gallery img {
-  height: 200px;
-  border-radius: 10px;
+.event-banner img {
+  width: 100%;
+  max-height: 360px;
+  object-fit: cover;
+  border-bottom: 2px solid #ccc;
 }
 
-.event-info {
-  margin-top: 2rem;
+.event-content {
+  max-width: 900px;
+  margin: 2rem auto;
+  background-color: white;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+}
+
+.event-info{
+  background-color: #fff;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.06);
+  margin-bottom: 2rem;
+}
+
+.event-info h1 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.event-info p {
+  font-size: 1.1rem;
+  margin: 0.5rem 0;
+}
+
+.description {
+  margin-top: 1rem;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #555;
 }
 
 .purchase-box {
