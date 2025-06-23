@@ -5,6 +5,8 @@ import ForumView from '@/views/ForumView.vue'
 import TicketCart from "../components/TicketCart.vue"
 import EventCreate from "../components/EventCreate.vue"
 import MyEvent from "../views/MyEvent.vue"
+import Login from "../views/loginView.vue"
+import Register from "../views/registerView.vue"
 
 import MerchandiseList from '@/pages/MerchandiseList.vue';
 import MerchandiseDetail from '@/pages/MerchandiseDetail.vue';
@@ -65,6 +67,16 @@ const routes = [
     path: '/merchcart',
     name: 'MerchandiseCart',
     component: MerchandiseCart
+  },
+  {
+    path: '/login',
+    name: 'Login',
+    component: Login
+  },
+  {
+    path: '/register',
+    name: 'Register',
+    component: Register
   }
 ]
 
