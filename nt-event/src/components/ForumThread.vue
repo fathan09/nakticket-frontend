@@ -89,7 +89,7 @@ export default {
       replyContent.value = '';
     };
     
-    const submitReply = () => {
+    const submitReply = async () => {
       if (!replyContent.value.trim()) return;
       
       submitting.value = true;
@@ -102,12 +102,16 @@ export default {
         isOrganizer: false // Would be determined by user role
       };
       
-      forumStore.addReply(props.thread.id, replyData)
-        .then(() => {
-          replyContent.value = '';
-          showReplyForm.value = false;
-          submitting.value = false;
-        });
+      try {
+        await forumStore.addReply(props.thread.id, replyData);
+        replyContent.value = '';
+        showReplyForm.value = false;
+      } catch (error) {
+        console.error('Error:', error.response?.data || error.message);
+        alert(error.message);
+      } finally {
+        submitting.value = false;
+      }
     };
     
     return {

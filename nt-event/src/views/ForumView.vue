@@ -67,10 +67,14 @@ export default {
       forumStore.selectThread(threadId);
     };
     
-    const createThread = (newThread) => {
-      forumStore.createThread(newThread).then(() => {
+    const createThread = async (newThread) => {
+      try {
+        await forumStore.createThread(newThread);
         showNewThreadForm.value = false;
-      });
+      } catch (error) {
+        console.error('Error:', error.response?.data || error.message);
+        alert(error.message);
+      }
     };
     
     return {

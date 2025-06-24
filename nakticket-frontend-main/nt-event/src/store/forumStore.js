@@ -1,4 +1,5 @@
 import { defineStore } from 'pinia';
+import axios from 'axios';
 
 export const useForumStore = defineStore('forumStore', {
   state: () => ({
@@ -30,13 +31,11 @@ export const useForumStore = defineStore('forumStore', {
     async fetchForumData() {
       this.loading = true;
       try {
-        const response = await fetch('/dummyForum.json');
-        if (!response.ok) {
-          throw new Error('Failed to fetch forum data');
-        }
-        this.threads = await response.json();
+        const response = await axios.get('http://localhost/NakTicketBackend/forum');
+        this.threads = response.data;
       } catch (error) {
         console.error('Error loading forum data:', error);
+        this.threads = [];
       } finally {
         this.loading = false;
       }
@@ -46,6 +45,67 @@ export const useForumStore = defineStore('forumStore', {
       this.selectedThread = this.getThreadById(id);
     },
 
-    // Add more functions here
+    async createThread(threadData) {
+      this.submitting = true;
+      try {
+        const response = await axios.post('http://localhost/NakTicketBackend/forum', threadData);
+        await this.fetchForumData();
+        return response.data;
+      } catch (error) {
+        console.error('Error creating thread:', error);
+        throw error;
+      } finally {
+        this.submitting = false;
+      }
+    },
+
+    async addReply(threadId, replyData) {
+      this.submitting = true;
+      try {
+        const response = await axios.post(`http://localhost/NakTicketBackend/forum/${threadId}/reply`, replyData);
+        await this.fetchForumData();
+        if (this.selectedThread && this.selectedThread.id === parseInt(threadId)) {
+          this.selectedThread = this.getThreadById(threadId);
+        }
+        return response.data;
+      } catch (error) {
+        console.error('Error adding reply:', error);
+        throw error;
+      } finally {
+        this.submitting = false;
+      }
+    },
+
+    async deleteThread(threadId) {
+      try {
+        const response = await axios.delete(`http://localhost/NakTicketBackend/forum/${threadId}`);
+        this.threads = this.threads.filter(thread => thread.id !== parseInt(threadId));
+        if (this.selectedThread && this.selectedThread.id === parseInt(threadId)) {
+          this.selectedThread = null;
+        }
+        return response.data;
+      } catch (error) {
+        console.error('Error deleting thread:', error);
+        throw error;
+      }
+    },
+
+    async deleteReply(threadId, replyId) {
+      try {
+        const response = await axios.delete(`http://localhost/NakTicketBackend/forum/${threadId}/reply/${replyId}`);
+        await this.fetchForumData();
+        if (this.selectedThread && this.selectedThread.id === parseInt(threadId)) {
+          this.selectedThread = this.getThreadById(threadId);
+        }
+        return response.data;
+      } catch (error) {
+        console.error('Error deleting reply:', error);
+        throw error;
+      }
+    },
+
+    async toggleLike(threadId, replyIndex = null) {
+      console.log('Like functionality not implemented in backend yet');
+    }
   }
 }); 
