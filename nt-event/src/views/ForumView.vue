@@ -68,13 +68,63 @@ export default {
     };
     
     const createThread = async (newThread) => {
+      // Prevent multiple calls
+      if (submitting.value) {
+        console.log('ForumView: Already submitting, ignoring duplicate call');
+        return;
+      }
+      
+      console.log('ForumView: Starting thread creation...', newThread);
+      
       try {
         await forumStore.createThread(newThread);
+        console.log('ForumView: Thread created successfully');
         showNewThreadForm.value = false;
+        // Show success message
+        alert('Thread created successfully!');
       } catch (error) {
-        console.error('Error:', error.response?.data || error.message);
-        alert(error.message);
+        console.error('ForumView: Error creating thread:', error.response?.data || error.message);
+        
+        // Check if thread was actually created despite the error
+        const currentThreadCount = threads.value.length;
+        await forumStore.fetchForumData();
+        
+        if (threads.value.length > currentThreadCount) {
+          // Thread was created successfully despite the error
+          console.log('ForumView: Thread was created despite error');
+          showNewThreadForm.value = false;
+          alert('Thread created successfully!');
+        } else {
+          // Actual error occurred
+          console.log('ForumView: Actual error occurred');
+          const errorMessage = error.response?.data?.error || error.message || 'Failed to create thread';
+          alert('Error: ' + errorMessage);
+        }
       }
+    };
+    
+    const deleteThread = async (threadId) => {
+      try {
+        await forumStore.deleteThread(threadId);
+        // If the deleted thread was selected, go back to the list
+        if (selectedThread.value && selectedThread.value.id === threadId) {
+          selectedThread.value = null;
+        }
+      } catch (error) {
+        console.error('Error deleting thread:', error);
+        throw error;
+      }
+    };
+    
+    const formatDate = (dateString) => {
+      const date = new Date(dateString);
+      return date.toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'short',
+        day: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit'
+      });
     };
     
     return {
@@ -85,7 +135,9 @@ export default {
       selectedThreadId,
       showNewThreadForm,
       selectThread,
-      createThread
+      createThread,
+      deleteThread,
+      formatDate
     };
   }
 };

@@ -4,8 +4,13 @@
       <h3 class="thread-title">{{ thread.title }}</h3>
       <ForumPost 
         :post="thread.mainPost" 
+        :threadId="thread.id"
+        :threadTitle="thread.title"
+        :isMainPost="true"
         @like="handleMainPostLike"
         @reply="showReplyForm = true"
+        @edit="handleEdit"
+        @delete="handleDelete"
       />
     </div>
     
@@ -42,8 +47,12 @@
         v-for="(reply, index) in thread.replies" 
         :key="index" 
         :post="reply"
+        :threadId="thread.id"
+        :replyId="reply.id"
         class="thread-reply"
-        @like="handleReplyLike(index)"
+        @like="handleReplyLike(reply.id)"
+        @edit="handleEdit"
+        @delete="handleDelete"
       />
     </div>
     
@@ -76,12 +85,50 @@ export default {
     const replyContent = ref('');
     const submitting = ref(false);
     
-    const handleMainPostLike = () => {
-      forumStore.toggleLike(props.thread.id);
+    const handleMainPostLike = async () => {
+      try {
+        await forumStore.toggleLike(props.thread.id);
+      } catch (error) {
+        console.error('Error:', error.response?.data || error.message);
+        alert(error.message);
+      }
     };
     
-    const handleReplyLike = (index) => {
-      forumStore.toggleLike(props.thread.id, index);
+    const handleReplyLike = async (replyId) => {
+      try {
+        await forumStore.toggleLike(props.thread.id, replyId);
+      } catch (error) {
+        console.error('Error:', error.response?.data || error.message);
+        alert(error.message);
+      }
+    };
+
+    const handleEdit = async (editData) => {
+      try {
+        if (editData.type === 'thread') {
+          await forumStore.editThread(editData.threadId, editData.data);
+        } else if (editData.type === 'reply') {
+          await forumStore.editReply(editData.threadId, editData.replyId, editData.data);
+        }
+      } catch (error) {
+        console.error('Error:', error.response?.data || error.message);
+        alert('Failed to save edit: ' + error.message);
+      }
+    };
+
+    const handleDelete = async (deleteData) => {
+      try {
+        if (deleteData.type === 'thread') {
+          await forumStore.deleteThread(deleteData.threadId);
+          // Navigate back to forum list after deleting thread
+          window.history.back();
+        } else if (deleteData.type === 'reply') {
+          await forumStore.deleteReply(deleteData.threadId, deleteData.replyId);
+        }
+      } catch (error) {
+        console.error('Error:', error.response?.data || error.message);
+        alert('Failed to delete: ' + error.message);
+      }
     };
     
     const cancelReply = () => {
@@ -120,6 +167,8 @@ export default {
       submitting,
       handleMainPostLike,
       handleReplyLike,
+      handleEdit,
+      handleDelete,
       cancelReply,
       submitReply
     };

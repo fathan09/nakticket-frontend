@@ -59,20 +59,21 @@ export default {
   },
   methods: {
     submitThread() {
-      if (!this.isValid) return;
+      if (!this.isValid || this.submitting) return;
+      
+      console.log('NewThreadForm: Submitting thread...');
       
       const newThread = {
         title: this.title,
         mainPost: {
           content: this.content,
           author: 'Current User', // This would be replaced with actual user info
-          date: new Date().toISOString(),
           likes: 0,
           isOrganizer: false // This would be determined by user role
-        },
-        replies: []
+        }
       };
       
+      console.log('NewThreadForm: Thread data:', newThread);
       this.$emit('submit', newThread);
     },
     resetForm() {

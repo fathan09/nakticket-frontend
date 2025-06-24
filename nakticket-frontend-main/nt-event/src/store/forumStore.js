@@ -59,6 +59,23 @@ export const useForumStore = defineStore('forumStore', {
       }
     },
 
+    async editThread(threadId, editData) {
+      this.submitting = true;
+      try {
+        const response = await axios.put(`http://localhost/NakTicketBackend/forum/${threadId}`, editData);
+        await this.fetchForumData();
+        if (this.selectedThread && this.selectedThread.id === parseInt(threadId)) {
+          this.selectedThread = this.getThreadById(threadId);
+        }
+        return response.data;
+      } catch (error) {
+        console.error('Error editing thread:', error);
+        throw error;
+      } finally {
+        this.submitting = false;
+      }
+    },
+
     async addReply(threadId, replyData) {
       this.submitting = true;
       try {
@@ -70,6 +87,23 @@ export const useForumStore = defineStore('forumStore', {
         return response.data;
       } catch (error) {
         console.error('Error adding reply:', error);
+        throw error;
+      } finally {
+        this.submitting = false;
+      }
+    },
+
+    async editReply(threadId, replyId, editData) {
+      this.submitting = true;
+      try {
+        const response = await axios.put(`http://localhost/NakTicketBackend/forum/${threadId}/reply/${replyId}`, editData);
+        await this.fetchForumData();
+        if (this.selectedThread && this.selectedThread.id === parseInt(threadId)) {
+          this.selectedThread = this.getThreadById(threadId);
+        }
+        return response.data;
+      } catch (error) {
+        console.error('Error editing reply:', error);
         throw error;
       } finally {
         this.submitting = false;
@@ -104,8 +138,32 @@ export const useForumStore = defineStore('forumStore', {
       }
     },
 
-    async toggleLike(threadId, replyIndex = null) {
-      console.log('Like functionality not implemented in backend yet');
+    async toggleLike(threadId, replyId = null) {
+      try {
+        let response;
+        if (replyId) {
+          // Like a reply
+          response = await axios.put(`http://localhost/NakTicketBackend/forum/${threadId}/reply/${replyId}/like`, {
+            action: 'like'
+          });
+        } else {
+          // Like a thread
+          response = await axios.put(`http://localhost/NakTicketBackend/forum/${threadId}/like`, {
+            action: 'like'
+          });
+        }
+        
+        // Refresh data to get updated like counts
+        await this.fetchForumData();
+        if (this.selectedThread && this.selectedThread.id === parseInt(threadId)) {
+          this.selectedThread = this.getThreadById(threadId);
+        }
+        
+        return response.data;
+      } catch (error) {
+        console.error('Error toggling like:', error);
+        throw error;
+      }
     }
   }
 }); 

@@ -43,6 +43,9 @@
               </span>
               <span class="thread-date">{{ formatDate(thread.mainPost.date) }}</span>
               <span class="thread-stats">{{ thread.replies ? thread.replies.length : 0 }} replies</span>
+              <div class="thread-actions" v-if="canDeleteThread(thread)">
+                <button class="delete-thread-btn" @click.stop="deleteThread(thread.id)">🗑️</button>
+              </div>
             </div>
           </div>
         </div>
@@ -94,6 +97,20 @@ export default {
         month: 'short',
         day: 'numeric'
       });
+    },
+    canDeleteThread(thread) {
+      // Allow deletion if user is admin or the thread author
+      const currentUser = 'Current User'; // Would be replaced with actual user
+      return currentUser === 'Admin' || thread.mainPost.author === currentUser;
+    },
+    async deleteThread(threadId) {
+      if (confirm('Are you sure you want to delete this thread? This action cannot be undone.')) {
+        try {
+          await this.$parent.deleteThread(threadId);
+        } catch (error) {
+          alert('Failed to delete thread: ' + error.message);
+        }
+      }
     }
   }
 };
@@ -201,6 +218,19 @@ export default {
 .loading-indicator, .no-threads {
   padding: 2rem;
   text-align: center;
+  color: #777;
+}
+
+.thread-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.delete-thread-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
   color: #777;
 }
 </style> 
