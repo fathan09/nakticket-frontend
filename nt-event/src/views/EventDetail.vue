@@ -1,29 +1,31 @@
 <template>
   <div class="event-detail" v-if="event">
     <div class="event-banner">
-      <img :src="event.image" alt="Event Banner"/>
+      <img :src="event.image" alt="Event Banner" />
     </div>
     <div class="event-info">
       <h2>{{ event.title }}</h2>
-      <h3><strong>Date: </strong>{{ event.date }}</h3> <br>
-      <h3><strong>Time:</strong></h3> <h3>{{ event.time }}</h3><br>
+      <h3><strong>Date: </strong>{{ event.date }}</h3>
+      <br />
+      <h3><strong>Time:</strong></h3>
+      <h3>{{ event.time }}</h3>
+      <br />
       <h3><strong>Organizers:</strong> {{ event.organizer }}</h3>
       <p class="description">{{ event.description }}</p>
     </div>
   </div>
   <TicketList />
-
 </template>
 
 <script>
 import { ref, onMounted } from "vue";
 import { useRoute } from "vue-router";
-import TicketList from '@/components/TicketList.vue';
+import TicketList from "@/components/TicketList.vue";
 
 export default {
   name: "EventDetail",
-  components : {
-    TicketList
+  components: {
+    TicketList,
   },
   setup() {
     const route = useRoute();
@@ -35,16 +37,20 @@ export default {
       event.value = data.find((e) => e.id === parseInt(route.params.id));
     });
 
-    return {event}
+    return { event };
   },
-}
+};
 </script>
 
 <style scoped>
 .event-detail {
   font-family: Arial, sans-serif;
   background-color: #f9f9f9;
-  padding-bottom: 3rem;
+  padding: 3rem 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
 }
 
 .event-banner {
@@ -73,12 +79,14 @@ export default {
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
 }
 
-.event-info{
+.event-info {
   background-color: #fff;
   padding: 2rem;
   border-radius: 12px;
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.06);
-  margin-bottom: 2rem;
+  max-width: 800px;
+  width: 100%;
+  text-align: center;
 }
 
 .event-info h1 {
