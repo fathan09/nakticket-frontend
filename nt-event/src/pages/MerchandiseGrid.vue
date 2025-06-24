@@ -1,14 +1,10 @@
-<!-- MerchandiseGrid.vue -->
 <template>
   <div class="merch-grid">
-    <!-- Render merchandise cards -->
     <MerchCard v-for="(item, index) in merchList" :key="index" :merch="item" :index="index" @edit-merch="editMerch"
       @delete-merch="deleteMerch" />
 
-    <!-- Add Merchandise Button -->
     <CreateMerchButton @open-popup="openForm" />
 
-    <!-- Popup Form -->
     <div v-if="showForm" class="modal-overlay">
       <div class="modal">
         <button class="close-button" @click="closeForm">×</button>
@@ -75,10 +71,8 @@ export default {
     },
     submitForm() {
       if (this.editIndex !== null) {
-        // Update existing merch
         this.$set(this.merchList, this.editIndex, { ...this.newMerch });
       } else {
-        // Add new merch
         this.merchList.push({ ...this.newMerch });
       }
       this.closeForm();

@@ -4,7 +4,6 @@
       <h2>Merchandise Cart</h2>
 
       <div v-if="cart.items.length > 0" class="cart-table">
-        <!-- Header -->
         <div class="cart-header">
           <span>Product</span>
           <span>Price</span>
@@ -13,7 +12,6 @@
           <span></span>
         </div>
 
-        <!-- Cart Items -->
         <div
           v-for="item in cart.items"
           :key="item.id"
@@ -41,7 +39,6 @@
           <button class="remove" @click="cart.removeItem(item.id)">✕</button>
         </div>
 
-        <!-- Footer actions -->
         <div class="cart-actions">
           <div class="totals">
             <strong>Total:</strong> {{ totalPrice }} MYR
