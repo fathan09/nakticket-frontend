@@ -7,13 +7,13 @@
       <h4>{{ merch.name }}</h4>
       <p>{{ merch.details }}</p>
       <p><strong>Price:</strong> {{ merch.price }}</p>
-      <p><strong>Stock:</strong> {{ merch.stock }}</p>
+      <p><strong>Quantity:</strong> {{ merch.stock }}</p>
     </div>
     <div class="card-buttons">
-      <button class="icon-button">
+      <button class="icon-button" @click="$emit('edit-merch', index)">
         <PencilIcon :style="{ width: '24px', height: '24px' }" />
       </button>
-      <button class="icon-button">
+      <button class="icon-button" @click="$emit('delete-merch', index)">
         <TrashIcon :style="{ width: '24px', height: '24px' }" />
       </button>
     </div>
@@ -21,19 +21,21 @@
 </template>
 
 <script>
-import { PencilIcon, TrashIcon } from '@heroicons/vue/24/solid'
+import { PencilIcon, TrashIcon } from '@heroicons/vue/24/solid';
 
 export default {
   name: 'MerchCard',
   props: {
-    merch: Object
+    merch: Object,
+    index: Number
   },
   components: {
     PencilIcon,
     TrashIcon
   }
-}
+};
 </script>
+
 
 <style scoped>
 .merch-card {

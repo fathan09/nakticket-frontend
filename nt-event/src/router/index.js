@@ -12,6 +12,8 @@ import MerchandiseList from '@/pages/MerchandiseList.vue';
 import MerchandiseDetail from '@/pages/MerchandiseDetail.vue';
 import MerchandiseCart from '@/pages/MerchandiseCart.vue';
 
+import MerchandiseGrid from '@/pages/MerchandiseGrid.vue';
+
 const routes = [
   {
     path: '/',
@@ -77,6 +79,11 @@ const routes = [
     path: '/register',
     name: 'Register',
     component: Register
+  },
+  {
+    path: '/merchgrid',
+    name: 'MerchandiseGrid',
+    component: MerchandiseGrid
   }
 ]
 
