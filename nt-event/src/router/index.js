@@ -7,6 +7,7 @@ import EventCreate from "../components/EventCreate.vue"
 import MyEvent from "../views/MyEvent.vue"
 import Login from "../views/loginView.vue"
 import Register from "../views/registerView.vue"
+import MyOrders from "../views/orderView.vue"
 
 import MerchandiseList from '@/pages/MerchandiseList.vue';
 import MerchandiseDetail from '@/pages/MerchandiseDetail.vue';
@@ -77,7 +78,13 @@ const routes = [
     path: '/register',
     name: 'Register',
     component: Register
+  },
+  {
+    path: '/my-orders',
+    name: 'MyOrder',
+    component: MyOrders
   }
+
 ]
 
 const router = createRouter({
