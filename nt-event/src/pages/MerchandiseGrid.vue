@@ -1,7 +1,10 @@
 <template>
   <div class="merch-grid">
-    <MerchCard v-for="(item, index) in merchList" :key="index" :merch="item" :index="index" @edit-merch="editMerch"
-      @delete-merch="deleteMerch" />
+    <router-link v-for="(item, index) in merchStore.merchList" :key="index" :to="`/merch/${item.id}`"
+      style="text-decoration: none; color: inherit;">
+      <MerchCard :merch="item" :index="index" @edit-merch="editMerch" @delete-merch="deleteMerch" />
+    </router-link>
+
 
     <CreateMerchButton @open-popup="openForm" />
 
@@ -31,22 +34,24 @@
         </form>
       </div>
     </div>
-
   </div>
 </template>
 
 <script>
 import MerchCard from '../components/MerchCard.vue';
 import CreateMerchButton from './CreateMerchButton.vue';
+import { useMerchStore } from '@/store/merch';
+
 
 export default {
   components: { MerchCard, CreateMerchButton },
   data() {
     return {
-      merchList: [],
+      merchStore: useMerchStore(),
       showForm: false,
       editIndex: null,
       newMerch: {
+        id: null,
         name: '',
         details: '',
         stock: 0,
@@ -55,6 +60,7 @@ export default {
       }
     };
   },
+
   methods: {
     openForm() {
       this.showForm = true;
@@ -70,10 +76,12 @@ export default {
       }
     },
     submitForm() {
+      const id = Date.now();
+      const merchItem = { ...this.newMerch, id };
       if (this.editIndex !== null) {
-        this.$set(this.merchList, this.editIndex, { ...this.newMerch });
+        this.merchStore.merchList[this.editIndex] = merchItem;
       } else {
-        this.merchList.push({ ...this.newMerch });
+        this.merchStore.addMerch(merchItem);
       }
       this.closeForm();
     },

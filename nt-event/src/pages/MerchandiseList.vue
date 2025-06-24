@@ -1,18 +1,14 @@
 <template>
   <div class="merchandise-page">
-    <div class="event-header">
-      <h2>Event Merchandise</h2>
-    </div>
-
     <div class="container">
       <h3>Merchandise Purchase</h3>
-      <h4>{Event Title}</h4>
+      <h4>Merchandise Sold for {{ eventTitle }}</h4>
 
       <div v-if="feedbackMessage" class="feedback">{{ feedbackMessage }}</div>
 
       <div class="grid">
         <MerchandiseCard
-          v-for="item in products"
+          v-for="item in merchList"
           :key="item.id"
           :product="item"
           @add-to-cart="addToCart"
@@ -28,21 +24,23 @@ import { useCartStore } from '../store/cart';
 
 export default {
   name: 'MerchandiseList',
-  components: { MerchandiseCard},
+  components: { MerchandiseCard },
+  props: {
+    merchList: {
+      type: Array,
+      required: true
+    },
+    eventTitle: {
+      type: String,
+      default: ''
+    }
+  },
   data() {
     return {
-      products: [],
-      feedbackMessage: '',
+      feedbackMessage: ''
     };
   },
-  mounted() {
-    this.fetchProducts();
-  },
   methods: {
-    async fetchProducts() {
-      const res = await fetch('/products.json');
-      this.products = await res.json();
-    },
     addToCart(product) {
       const cart = useCartStore();
       cart.addItem(product);
@@ -51,8 +49,8 @@ export default {
     showFeedback(message) {
       this.feedbackMessage = message;
       setTimeout(() => (this.feedbackMessage = ''), 2000);
-    },
-  },
+    }
+  }
 };
 </script>
 
@@ -63,7 +61,7 @@ export default {
   font-family: poppins, sans-serif;
 }
 .event-header {
-  background-color: #F4E4BE;
+  background-color: #f4e4be;
   padding: 1rem;
   text-align: left;
   font-weight: bold;

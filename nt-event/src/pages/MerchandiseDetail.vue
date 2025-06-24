@@ -18,6 +18,7 @@
 </template>
 
 <script>
+import { useMerchStore } from '@/store/merch';
 import { useCartStore } from '@/store/cart';
 
 export default {
@@ -28,11 +29,18 @@ export default {
       feedbackMessage: ''
     };
   },
-  async mounted() {
-    const res = await fetch('/products.json');
-    const data = await res.json();
-    this.product = data.find((p) => p.id === Number(this.$route.params.id));
+  props: {
+    routeId: {
+      type: Number,
+      default: null
+    }
   },
+  mounted() {
+    const merchStore = useMerchStore();
+    const id = this.routeId ?? Number(this.$route.params.id);
+    this.product = merchStore.getMerchById(id);
+  },
+
   methods: {
     addToCart() {
       const cart = useCartStore();
@@ -51,6 +59,7 @@ export default {
   padding: 2rem 1rem;
   font-family: poppins, sans-serif;
 }
+
 .detail-container {
   max-width: 1000px;
   margin: auto;
@@ -61,6 +70,7 @@ export default {
   border-radius: 10px;
   gap: 2rem;
 }
+
 .image-box {
   flex: 1 1 300px;
   max-width: 400px;
@@ -70,18 +80,22 @@ export default {
   align-items: center;
   justify-content: center;
 }
+
 .image-box img {
   max-height: 100%;
   max-width: 100%;
   object-fit: contain;
 }
+
 .info-box {
   flex: 1 1 300px;
 }
+
 .price {
   margin: 1rem 0;
   font-size: 1.1rem;
 }
+
 .add-btn {
   background-color: #799887;
   color: white;
@@ -90,9 +104,11 @@ export default {
   border-radius: 6px;
   cursor: pointer;
 }
+
 .add-btn:hover {
   background-color: #657a70;
 }
+
 .feedback {
   background-color: #dff0d8;
   color: #3c763d;

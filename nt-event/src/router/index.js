@@ -84,6 +84,11 @@ const routes = [
     path: '/merchgrid',
     name: 'MerchandiseGrid',
     component: MerchandiseGrid
+  },
+  {
+    path: '/merch/:id',
+    name: 'MerchDetail',
+    component: MerchandiseDetail
   }
 ]
 
@@ -92,4 +97,4 @@ const router = createRouter({
   routes
 })
 
-export default router
+export default router;
