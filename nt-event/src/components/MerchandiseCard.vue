@@ -1,64 +1,114 @@
 <template>
-    <div class="card" @click="goToDetail">
-      <img :src="product.image || '/images/placeholder.png'" alt="product image" />
-      <div class="card-body">
-        <strong>{{ product.name }}</strong>
-        <p>{{ product.description }}</p>
-        <p><span class="label">Price:</span> {{ product.price }} {{ product.currency }}</p>
-        <button class="add-btn" @click.stop="$emit('add-to-cart', product)">Add to Cart</button>
+  <div class="merch-card">
+    <img :src="product.image" :alt="product.name" />
+    <div class="info">
+      <h4>{{ product.name }}</h4>
+      <p class="description">{{ product.details }}</p>
+      <p class="stock">Stock: {{ product.stock }}</p>
+      <p class="price">Price: {{ product.price }} {{ product.currency }}</p>
+
+      <div class="action-row">
+        <input type="number" v-model.number="quantity" min="1" :max="product.stock" />
+        <button @click="handleAddToCart" :disabled="quantity < 1 || quantity > product.stock">
+          Add to Cart
+        </button>
       </div>
     </div>
-  </template>
-  
-  <script>
-  export default {
-    name: 'MerchandiseCard',
-    props: ['product'],
-    methods: {
-      goToDetail() {
-        this.$router.push(`/merch/${this.product.id}`);
-      },
-    },
-  };
-  </script>
-  
-  <style scoped>
-  .card {
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    padding: 1rem;
-    background-color: white;
-    cursor: pointer;
-    transition: box-shadow 0.3s;
+  </div>
+</template>
+
+
+<script>
+import { useMerchStore } from '@/store/merch';
+
+export default {
+  name: 'MerchandiseCard',
+  props: {
+    product: Object
+  },
+  data() {
+    return {
+      quantity: 1
+    };
+  },
+  methods: {
+    handleAddToCart() {
+      const merchStore = useMerchStore();
+      merchStore.addToCart({
+        ...this.product,
+        quantity: this.quantity
+      });
+      this.quantity = 1;
+    }
   }
-  .card:hover {
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  }
-  .card img {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
-    border-radius: 6px;
-    margin-bottom: 1rem;
-  }
-  .card-body {
-    text-align: center;
-  }
-  .label {
-    font-weight: bold;
-  }
-  .add-btn {
-    margin-top: 10px;
-    background-color: #799887;
-    color: white;
-    padding: 0.5rem 1rem;
-    border: none;
-    border-radius: 6px;
-    font-weight: bold;
-    cursor: pointer;
-  }
-  .add-btn:hover {
-    background-color: #657a70;
-  }
-  </style>
-  
+};
+</script>
+
+<style scoped>
+.merch-card {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+}
+
+.merch-card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 6px;
+  margin-bottom: 1rem;
+}
+
+.info h4 {
+  margin: 0 0 0.5rem;
+  font-size: 1rem;
+}
+
+.description {
+  font-size: 0.9rem;
+  margin-bottom: 0.3rem;
+}
+
+.stock {
+  font-size: 0.85rem;
+  margin-bottom: 0.3rem;
+  color: #666;
+}
+
+.price {
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.action-row {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.action-row input[type="number"] {
+  width: 60px;
+  padding: 4px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+.action-row button {
+  flex-grow: 1;
+  background: #799887;
+  color: white;
+  padding: 0.4rem 0.8rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.action-row button:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
+</style>
