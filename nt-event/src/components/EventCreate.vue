@@ -11,7 +11,7 @@
     </div>
 
     <div class="form-section">
-      <input type="text" v-model="event.name" placeholder="Event Name*" />
+      <input type="text" v-model="event.name" placeholder="Event Name" />
       <select v-model="event.category">
         <option disabled value="">Choose Category</option>
         <option value="performance">Entertainment & Performances</option>
@@ -21,10 +21,6 @@
       </select>
 
       <div class="grid-row">
-        <div class="field">
-          <label>Organized by</label>
-          <p>{{ organizer }}</p>
-        </div>
 
         <div class="field">
           <label>Date & Time</label>
@@ -61,7 +57,6 @@ export default {
   },
   data() {
     return {
-      organizer: "",
       bannerPreview: null
     };
   },
@@ -123,7 +118,7 @@ export default {
 
 <style scoped>
 .event-create-box {
-  max-width: 800px;
+  width: 1200px;
   margin: 2rem auto;
   border-radius: 16px;
   overflow: hidden;
