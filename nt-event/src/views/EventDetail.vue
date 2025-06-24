@@ -5,12 +5,28 @@
     </div>
     <div class="event-info">
       <h2>{{ event.title }}</h2>
-      <h3><strong>Date: </strong>{{ event.date }}</h3>
+      <h3>
+        <CalendarIcon class="icon"/>
+        <strong>Date: </strong>{{ event.date }}
+      </h3>
       <br />
-      <h3><strong>Time:</strong></h3>
-      <h3>{{ event.time }}</h3>
+      <h3>
+        <ClockIcon class="icon" />
+        <strong>Time:</strong>
+      </h3>
+      <h3>
+        {{ event.time }}
+      </h3>
+      <br />
+      <h3>
+        <MapPinIcon class="icon" />
+        <strong>Location:</strong>
+      </h3>
+      <h3>{{ event.location }}</h3>
       <br />
       <h3><strong>Organizers:</strong> {{ event.organizer }}</h3>
+      <br />
+      <h3><strong>Category:</strong> {{ event.category }}</h3>
       <p class="description">{{ event.description }}</p>
     </div>
   </div>
@@ -21,11 +37,15 @@
 import { ref, onMounted } from "vue";
 import { useRoute } from "vue-router";
 import TicketList from "@/components/TicketList.vue";
+import { CalendarIcon, ClockIcon, MapPinIcon } from "@heroicons/vue/24/outline";
 
 export default {
   name: "EventDetail",
   components: {
     TicketList,
+    CalendarIcon,
+    ClockIcon,
+    MapPinIcon,
   },
   setup() {
     const route = useRoute();
@@ -104,6 +124,14 @@ export default {
   font-size: 1rem;
   line-height: 1.6;
   color: #555;
+}
+
+.icon {
+  width: 20px;
+  height: 20px;
+  margin-right: 8px;
+  vertical-align: middle;
+  display: inline;
 }
 
 .purchase-box {
