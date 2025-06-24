@@ -109,3 +109,108 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.event-edit-box {
+  width: 1200px;
+  margin: 2rem auto;
+  border-radius: 16px;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  font-family: "Arial", sans-serif;
+}
+
+.banner-upload {
+  height: 340px;
+  background: #f5f5f5;
+  position: relative;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.banner-upload img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.upload-placeholder {
+  text-align: center;
+  color: #666;
+}
+
+.plus {
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.note {
+  font-size: 0.8rem;
+  color: #aaa;
+}
+
+.form-section {
+  padding: 2rem;
+}
+
+.form-section input,
+.form-section select {
+  display: block;
+  width: 100%;
+  padding: 0.75rem;
+  margin: 1rem 0;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+}
+
+.form-actions {
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.submit-btn {
+  background-color: #2d8cf0;
+  color: white;
+  padding: 0.75rem 2rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.submit-btn:hover {
+  background-color: #1a73e8;
+}
+
+.grid-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
+
+.field {
+  flex: 1;
+}
+
+.description-textarea {
+  width: 100%;
+  padding: 1rem;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  resize: vertical;
+  font-size: 1rem;
+  font-family: inherit;
+  min-height: 150px;
+}
+
+.field label {
+  font-weight: bold;
+  margin-bottom: 0.3rem;
+  display: block;
+}
+</style>
